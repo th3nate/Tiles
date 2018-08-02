@@ -1,4 +1,5 @@
 # Tiles game
+Built on Webpack v2.7.0 + AngularJS v1.7.0
 
 ### Quick start
 
