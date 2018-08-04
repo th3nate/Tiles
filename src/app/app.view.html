@@ -7,12 +7,9 @@
     </nav>
     <div class="col-md-10">
       <div id="board" class="float-left tiles clearfix"></div>
-      <pre ng-if="vm.debugging" class="float-left w-25">
-        startButtonFlag:     {{vm.stateService.startButtonFlag}}
-        endButtonFlag:       {{vm.stateService.endButtonFlag}}
-        currentSelectedTile: {{vm.stateService.currentSelectedTile}}
-        blockedList:         {{vm.stateService.blockedList}}
-        status:              {{vm.stateService.status}}
+      <pre ng-if="vm.debugging" class="float-left pl-2 w-25">
+blockedList:         {{vm.stateService.blockedList}}
+status:              {{vm.stateService.status | json}}
       </pre>
     </div>
   </div>

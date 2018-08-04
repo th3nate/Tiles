@@ -61,27 +61,82 @@ export default class AppController {
   /**
    * Tile onclick event
    * @param event
+   * return: void
    */
   tileClick(event) {
-    let self = this;
+    let self        = this;
+    let tile        = event.srcElement;
+    let location    = tile.dataset.location;
+    let tileIndex   = self.stateService.blockedList.indexOf(location);
+    let flag        = null;
+    let statusLabel = null;
     
-    self.tile      = event.srcElement;
-    self.location  = self.tile.dataset.location;
-    self.tileIndex = self.stateService.blockedList.indexOf(self.location);
+    if (self.stateService.startButtonFlag) {
+      flag = 'Start';
+    } else if (self.stateService.endButtonFlag) {
+      flag = 'End';
+    }
+    if (self.stateService.statusStart) {
+      statusLabel = 'statusStart';
+    } else if (self.stateService.statusEnd) {
+      statusLabel = 'statusEnd';
+    }
     
-    if (self.tileIndex !== -1) { // if tile is already selected
-      self.tile.className                   = self.tile.className.replace(' selected', '');
+    if (self.stateService.statusStart === location || self.stateService.statusEnd === location) {// if the tile already marked as start or end
+      return false;
+    }
+    
+    if (flag) { // if button flag is true
+      let buttonFlag = `${flag.toLowerCase()}ButtonFlag`;
+      let status     = `status${flag}`;
+      let button     = document.getElementById(flag.toLowerCase() + '-button');
+      let label      = document.createElement('label');
+      
+      if (statusLabel) { // if label exists we remove it first
+        let previousLabel = `div[data-location="${self.stateService[status]}"] label`;
+        try { // safe remove element
+          document.querySelector(previousLabel).remove();
+        } catch (e) {
+        }
+      }
+      
+      label.innerHTML = flag;
+      tile.appendChild(label);
+      
+      self.stateService[status]             = location; // set the currently selected tile
       self.stateService.currentSelectedTile = null; // set the currently selected tile
-      self.stateService.blockedList.splice(self.tileIndex, 1);
-    } else { // if tile is not selected
-      self.tile.className += ' selected';
-      self.stateService.currentSelectedTile = self.location; // set the currently selected tile
-      self.stateService.blockedList.push(self.location); // add the currently selected tile to the block list
+      self.stateService[buttonFlag]         = !self.stateService[buttonFlag];
+      button.className                      = button.className.replace(' active', '');
+      
+      if (tileIndex !== -1) { // if the tile is in the blocked array we remove it from there
+        self.stateService.blockedList.splice(tileIndex, 1);
+      }
+      if (tile.className.indexOf(' selected') !== -1) { // if the tile has a selected class we remove it from there
+        tile.className = tile.className.replace(' selected', '');
+      }
+      
+    } else { // if button flag is false
+      
+      if (tileIndex !== -1) { // if tile is already selected and buttons flags are false
+        tile.className                        = tile.className.replace(' selected', '');
+        self.stateService.currentSelectedTile = null; // set the currently selected tile
+        self.stateService.blockedList.splice(tileIndex, 1);
+      } else { // if tile is not selected
+        tile.className += ' selected';
+        self.stateService.currentSelectedTile = location; // set the currently selected tile
+        self.stateService.blockedList.push(location); // add the currently selected tile to the block list
+      }
     }
     
     self.$scope.$apply(); // trigger digest cycle
   }
   
+  /**
+   * Side bar buttons interaction
+   * @param event
+   * @param type
+   * return: void
+   */
   buttonClick(event, type) {
     let self            = this;
     let otherType       = type === 'start' ? 'end' : 'start';
