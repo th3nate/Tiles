@@ -1,10 +1,11 @@
-import {forEach} from 'lodash';
+import {forEach, hasIn} from 'lodash';
 
 export default class AppController {
   
-  constructor() {
-    let self = this;
-    
+  constructor($scope, StateService) {
+    let self          = this;
+    self.$scope       = $scope;
+    self.stateService = StateService;
     self.init();
   }
   
@@ -12,35 +13,12 @@ export default class AppController {
    * Init controller
    */
   init() {
-    let self = this;
+    let self       = this;
+    self.title     = 'App Controller!';
+    self.tiles     = self.stateService.tiles;
+    self.board     = document.getElementById('board');
+    self.debugging = true;
     
-    self.tiles = [
-      [0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0], [10, 0], [11, 0],
-      
-      [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1], [11, 1],
-      
-      [0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2], [8, 2], [9, 2], [10, 2], [11, 2],
-      
-      [0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [8, 3], [9, 3], [10, 3], [11, 3],
-      
-      [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [11, 4],
-      
-      [0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5], [8, 5], [9, 5], [10, 5], [11, 5],
-      
-      [0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6],
-      
-      [0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7], [8, 7], [9, 7], [10, 7], [11, 7],
-      
-      [0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [8, 8], [9, 8], [10, 8], [11, 8],
-      
-      [0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9], [6, 9], [7, 9], [8, 9], [9, 9], [10, 9], [11, 9],
-      
-      [0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [5, 10], [6, 10], [7, 10], [8, 10], [9, 10], [10, 10], [11, 10],
-      
-      [0, 11], [1, 11], [2, 11], [3, 11], [4, 11], [5, 11], [6, 11], [7, 11], [8, 11], [9, 11], [10, 11], [11, 11]
-    ];
-    self.title = 'App Controller!';
-    self.board = document.getElementById('board');
     self.setBoardSize();
     self.generateTiles();
     
@@ -72,16 +50,31 @@ export default class AppController {
     
     div.style.height = ((self.board.clientHeight - 2) / 12).toFixed().toString() + 'px'; // make the tile fit in a twelve tiles row
     div.style.width  = ((self.board.clientWidth - 2) / 12).toFixed().toString() + 'px'; // make the tile fit in a twelve tiles row
-    div.className    = 'tile';
+    div.className    = 'tile'; // add .tile class for further css styling
+    div.onclick      = self.tileClick.bind(self); // add callback function to the click event and bind the current 'this' to it. otherwise the 'this' will be the event.
+    
     div.setAttribute('data-location', `${tile[0]},${tile[1]}`);
-    div.onclick = self.tileClick;
     div.appendChild(newContent);// add the text node to the newly created div
     self.board.appendChild(div);// add the newly created element and its content into the DOM
   }
   
   tileClick(event) {
-    let self     = this;
-    let location = event.srcElement.dataset.location;
+    let self = this;
+    
+    self.tile      = event.srcElement;
+    self.location  = self.tile.dataset.location;
+    self.tileIndex = self.stateService.blockedList.indexOf(self.location);
+    if (self.tileIndex !== -1) { // if tile is already selected
+      self.tile.className                   = 'tile';
+      self.stateService.currentSelectedTile = null; // set the currently selected tile
+      self.stateService.blockedList.splice(self.tileIndex, 1);
+    } else {
+      self.tile.className                   = 'tile selected';
+      self.stateService.currentSelectedTile = self.location; // set the currently selected tile
+      self.stateService.blockedList.push(self.location); // add the currently selected tile to the block list
+    }
+    
+    self.$scope.$apply(); // trigger digest cycle
   }
   
   /**

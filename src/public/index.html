@@ -12,7 +12,20 @@
   <h5 class="my-0 mr-md-auto font-weight-normal">Tiles</h5>
 </div>
 <div class="container-fluid">
-  <ng-view></ng-view>
+
+  <div class="row">
+    <nav class="nav flex-column col-md-2">
+      <a class="nav-link active" href="#">Active</a>
+      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link disabled" href="#">Disabled</a>
+    </nav>
+
+    <div class="col-md-10">
+      <ng-view></ng-view>
+    </div>
+  </div>
+
 </div>
 </body>
 </html>

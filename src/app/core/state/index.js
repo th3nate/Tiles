@@ -1,6 +1,6 @@
-import State from './state.service';
+import StateService from './state.service';
 
-State.$inject = [];
+StateService.$inject = [];
 
 export default angular.module('state', [])
-                      .service('state', State).name;
+                      .service('StateService', StateService).name;

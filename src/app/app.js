@@ -18,6 +18,7 @@ import State from './core/state';
 // add components
 let components = [];
 components.push(ngRoute, Result, State);
+AppController.$inject = ['$scope', 'StateService'];
 
 export default angular
   .module('app', components)

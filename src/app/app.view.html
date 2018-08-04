@@ -1,13 +1,8 @@
-<div class="row">
-  <nav class="nav flex-column col-md-2">
-    <a class="nav-link active" href="#">Active</a>
-    <a class="nav-link" href="#">Link</a>
-    <a class="nav-link" href="#">Link</a>
-    <a class="nav-link disabled" href="#">Disabled</a>
-  </nav>
-
-  <div class="col-md-10">
-    <h1 class="display-4">{{vm.title}}</h1>
-    <div id="board" class="tiles"></div>
-  </div>
-</div>
+<div id="board" class="float-left tiles clearfix"></div>
+<pre ng-if="vm.debugging" class="float-left ml-5">
+  startButtonFlag:     {{vm.stateService.startButtonFlag}}
+  endButtonFlag:       {{vm.stateService.endButtonFlag}}
+  currentSelectedTile: {{vm.stateService.currentSelectedTile}}
+  blockedList:         {{vm.stateService.blockedList}}
+  status:              {{vm.stateService.status}}
+</pre>

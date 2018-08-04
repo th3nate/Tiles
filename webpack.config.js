@@ -1,19 +1,19 @@
 'use strict';
 
 // Modules
-var webpack           = require('webpack');
-var autoprefixer      = require('autoprefixer');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+let webpack           = require('webpack');
+let autoprefixer      = require('autoprefixer');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /**
  * Env
  * Get npm lifecycle event to identify the environment
  */
-var ENV    = process.env.npm_lifecycle_event;
-var isTest = ENV === 'test' || ENV === 'test-watch';
-var isProd = ENV === 'build';
+let ENV    = process.env.npm_lifecycle_event;
+let isTest = ENV === 'test' || ENV === 'test-watch';
+let isProd = ENV === 'build';
 
 module.exports = function makeWebpackConfig() {
   /**
@@ -21,7 +21,7 @@ module.exports = function makeWebpackConfig() {
    * Reference: http://webpack.github.io/docs/configuration.html
    * This is the object where all configuration gets set
    */
-  var config = {};
+  let config = {};
   
   /**
    * Entry
