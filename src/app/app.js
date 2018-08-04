@@ -5,15 +5,19 @@ import ngRoute from 'angular-route';
 // main app imports
 import AppController from './app.controller';
 import Config from './app.config';
-// main app styles imports
-import '../style/app.css';
+
+// styles imports
+
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import '../style/app.scss';
 
 // componenets imports
 import Result from './result';
+import State from './core/state';
 
 // add components
 let components = [];
-components.push(ngRoute, Result);
+components.push(ngRoute, Result, State);
 
 export default angular
   .module('app', components)
