@@ -29,10 +29,16 @@ html, body {
 }
 
 .tile {
+  position: relative;
   float: left;
   overflow: hidden;
   border: 1px solid #e5e5e5;
   cursor: pointer;
+  label {
+    position: absolute;
+    right: 100%;
+    bottom: 3px;
+  }
   &:hover, &.selected {
     background: #e5e5e5;
   }

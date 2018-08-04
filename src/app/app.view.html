@@ -1,8 +1,19 @@
-<div id="board" class="float-left tiles clearfix"></div>
-<pre ng-if="vm.debugging" class="float-left ml-5">
-  startButtonFlag:     {{vm.stateService.startButtonFlag}}
-  endButtonFlag:       {{vm.stateService.endButtonFlag}}
-  currentSelectedTile: {{vm.stateService.currentSelectedTile}}
-  blockedList:         {{vm.stateService.blockedList}}
-  status:              {{vm.stateService.status}}
-</pre>
+<div class="container-fluid">
+  <div class="row">
+    <nav class="nav flex-column col-md-2 pl-3">
+      <a class="btn btn-outline-light text-dark mb-2" href="javascript: void(0)" id="start-button" ng-click="vm.buttonClick($event, 'start')">Start</a>
+      <a class="btn btn-outline-light text-dark mb-2" href="javascript: void(0)" id="end-button" ng-click="vm.buttonClick($event, 'end')">End</a>
+      <a class="btn btn-outline-light text-dark mb-2" href="javascript: void(0)">Go!</a>
+    </nav>
+    <div class="col-md-10">
+      <div id="board" class="float-left tiles clearfix"></div>
+      <pre ng-if="vm.debugging" class="float-left w-25">
+        startButtonFlag:     {{vm.stateService.startButtonFlag}}
+        endButtonFlag:       {{vm.stateService.endButtonFlag}}
+        currentSelectedTile: {{vm.stateService.currentSelectedTile}}
+        blockedList:         {{vm.stateService.blockedList}}
+        status:              {{vm.stateService.status}}
+      </pre>
+    </div>
+  </div>
+</div>
