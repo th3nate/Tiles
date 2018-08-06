@@ -135,8 +135,8 @@ html, body {
   top: 8px;
   left: 8px;
   background: white;
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   z-index: 2;
 }
 .custom-btn:hover {
