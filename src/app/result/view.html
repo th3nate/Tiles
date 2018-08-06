@@ -1,1 +1,9 @@
-<h1 class="display-4">{{vm.title}}</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="display-4">Job ended successfully</h1>
+      <p class="lead">with {{vm.stateService.statusPath.length}} Steps, at {{vm.stateService.totalTime}} minutes</p>
+      <button class="custom-btn" ng-click="vm.goBack()"><span class="bg"></span><i class="material-icons">check_circle</i>Start Over</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,166 @@
+
+html, body {
+  font-size: 14px;
+  height: 100%;
+  width: 100%;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+/* Rules for sizing the icon. */
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.container-fluid, .container {
+  height: calc(100% - 64px);
+}
+
+.container-fluid .row, .container .row {
+  height: 100%;
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.tiles {
+}
+
+.tile {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  border: 1px solid #f8f9fa;
+  cursor: pointer;
+}
+
+.tile label {
+  position: absolute;
+  right: 2px;
+  bottom: 0px;
+  margin: 0;
+  z-index: 0;
+  pointer-events: none;
+
+}
+
+.tile:hover, .tile.selected {
+  background: #e5e5e5;
+
+}
+
+.tile.path {
+  background: azure;
+
+}
+
+.custom-btn {
+  position: relative;
+  width: 190px;
+  height: 30px;
+  color: white;
+  background-color: #D7D7DB;
+  font-size: 16px;
+  border-top: 0px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 0px solid transparent;
+  border-left: 5px solid #41A665;
+  cursor: pointer;
+}
+
+.custom-btn .material-icons {
+  position: absolute;
+  top: 4px;
+  left: 3px;
+  color: #41A665;
+  font-size: 21px;
+  z-index: 5;
+}
+
+.custom-btn .bg {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: white;
+  width: 12px;
+  height: 12px;
+  z-index: 2;
+}
+.custom-btn:hover {
+  background-color: #252525;
+}.custom-btn:hover  .material-icons{
+   color: #C42B4A;
+}
+
+
+.material-icons.md-red {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.material-icons.md-green {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  .container-fluid, .container {
+    height: calc(100% - 73px);
+  }
+}
+
